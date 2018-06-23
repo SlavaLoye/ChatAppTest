@@ -60,7 +60,7 @@
 		6C0D319E20DD8E0A001B27F9 /* ChatApp */ = {
 			isa = PBXGroup;
 			children = (
-				6C0D31B420DD9127001B27F9 /* Contrillers */,
+				6C0D31B420DD9127001B27F9 /* Controllers */,
 				6C0D319F20DD8E0A001B27F9 /* AppDelegate.swift */,
 				6C3A04E020DD966A00DB848A /* UIColor.swift */,
 				6C0D31A320DD8E0A001B27F9 /* Main.storyboard */,
@@ -72,13 +72,13 @@
 			path = ChatApp;
 			sourceTree = "<group>";
 		};
-		6C0D31B420DD9127001B27F9 /* Contrillers */ = {
+		6C0D31B420DD9127001B27F9 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				6C0D31A120DD8E0A001B27F9 /* ViewController.swift */,
 				6C0D31B520DD9151001B27F9 /* LoginViewController.swift */,
 			);
-			path = Contrillers;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
