@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class ViewController: UITableViewController {
 
@@ -14,12 +15,20 @@ class ViewController: UITableViewController {
         super.viewDidLoad()
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogin))
+        if Auth.auth().currentUser == nil {
+            perform(#selector(handleLogin), with: nil, afterDelay: 0)
+        }
     }
     
     @objc func handleLogin() {
+        
+        do {
+            try Auth.auth().signOut()
+        } catch let logoutError {
+            print(logoutError)
+        }
         let login = LoginViewController()
         present(login, animated: true, completion: nil)
-    
     }
 }
 
