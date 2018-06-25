@@ -75,7 +75,7 @@ class LoginViewController: UIViewController {
         return esp
     }()
     
-    let profileImageView: UIImageView = {
+    lazy var profileImageView: UIImageView = {
         let pfImage = UIImageView()
         pfImage.image = UIImage(named: "ProfileImage")
         pfImage.layer.borderWidth = 4
@@ -83,10 +83,16 @@ class LoginViewController: UIViewController {
         pfImage.layer.cornerRadius = 150 / 2
         pfImage.contentMode = .scaleAspectFill
         pfImage.translatesAutoresizingMaskIntoConstraints = false
-    
+        
         pfImage.layer.borderColor = UIColor(white: 1.5, alpha: 0.4).cgColor
         pfImage.clipsToBounds = true
         //pfImage.layer.cornerRadius = pfImage.bounds.height / 2
+        
+        // Подгружаем картинку в ленивом свойстве
+        
+        pfImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(LoginViewController.handleSelectProfileImageView)))
+        pfImage.isUserInteractionEnabled = true
+        
         return pfImage
     }()
     
@@ -96,6 +102,7 @@ class LoginViewController: UIViewController {
         sc.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         sc.selectedSegmentIndex = 1
         sc.addTarget(self, action: #selector(handleLoginRegisterChange), for: .valueChanged)
+    
         return sc
     }()
     
@@ -116,6 +123,8 @@ class LoginViewController: UIViewController {
         self.view.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
         //UIColor(r: 25, g: 129, b: 46)
     }
+    
+   
     
     
     // MARK: - handleLoginRegisterChange
@@ -157,7 +166,7 @@ class LoginViewController: UIViewController {
         
     func handleLogin() {
         guard let email = emailTextField.text, let password = passwordTextField.text else {
-            print("Form is  not Valid")
+            print("Form is not Valid")
             return
         }
         
@@ -189,7 +198,7 @@ class LoginViewController: UIViewController {
             }
             
             let ref = Database.database().reference(fromURL: "https://chatappdev-52051.firebaseio.com/")
-            let userReference = ref.child("user").child(uid)
+            let userReference = ref.child("users").child(uid)
             let values = ["name": name, "email": email]
             
             userReference.updateChildValues(values, withCompletionBlock: { (error, ref) in
@@ -198,6 +207,7 @@ class LoginViewController: UIViewController {
                     return
                 }
             })
+            self.dismiss(animated: true, completion: nil)
             
         }
     }
