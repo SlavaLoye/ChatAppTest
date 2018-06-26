@@ -85,10 +85,10 @@
 		6C0D319E20DD8E0A001B27F9 /* ChatApp */ = {
 			isa = PBXGroup;
 			children = (
+				6CED346120E25AFC009C6EE2 /* UICell */,
+				6CED346020E25AE8009C6EE2 /* UIColor */,
+				6CED345F20E25AC0009C6EE2 /* Model */,
 				6C0D31B420DD9127001B27F9 /* Controllers */,
-				6C8D3C9E20E041B400897CA0 /* UserCell.swift */,
-				6C8D3C9C20E03D5600897CA0 /* User.swift */,
-				6C3A04E020DD966A00DB848A /* UIColor.swift */,
 				6C0D319F20DD8E0A001B27F9 /* AppDelegate.swift */,
 				6C0D31A320DD8E0A001B27F9 /* Main.storyboard */,
 				6C0D31A920DD8E14001B27F9 /* Assets.xcassets */,
@@ -109,6 +109,30 @@
 				6C93522B20E1665F00948619 /* LoginViewControllerHandler.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		6CED345F20E25AC0009C6EE2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6C8D3C9C20E03D5600897CA0 /* User.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6CED346020E25AE8009C6EE2 /* UIColor */ = {
+			isa = PBXGroup;
+			children = (
+				6C3A04E020DD966A00DB848A /* UIColor.swift */,
+			);
+			path = UIColor;
+			sourceTree = "<group>";
+		};
+		6CED346120E25AFC009C6EE2 /* UICell */ = {
+			isa = PBXGroup;
+			children = (
+				6C8D3C9E20E041B400897CA0 /* UserCell.swift */,
+			);
+			path = UICell;
 			sourceTree = "<group>";
 		};
 		8A1033E0566B5D84B391FD17 /* Pods */ = {

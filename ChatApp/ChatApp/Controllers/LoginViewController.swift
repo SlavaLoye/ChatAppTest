@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseStorage
 
 class LoginViewController: UIViewController {
     
@@ -77,7 +78,7 @@ class LoginViewController: UIViewController {
     
     lazy var profileImageView: UIImageView = {
         let pfImage = UIImageView()
-        pfImage.image = UIImage(named: "ProfileImage")
+        pfImage.image = UIImage(named: "ProfileImage.png")
         pfImage.layer.borderWidth = 4
         //pfImage.layer.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         pfImage.layer.cornerRadius = 150 / 2
@@ -179,39 +180,7 @@ class LoginViewController: UIViewController {
         
     }
         
-    func handleRegister() {
-        guard let email = emailTextField.text, let password = passwordTextField.text, let name = nameTextField.text else {
-            print("Error")
-            return
-        }
-        
-        Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
-            if error != nil {
-                print("Error")
-                return
-            }
-            // создаем Reference
-            
-        guard let uid = Auth.auth().currentUser?.uid else{
-                print("There is no UID to access")
-                return
-            }
-            
-            let ref = Database.database().reference(fromURL: "https://chatappdev-52051.firebaseio.com/")
-            let userReference = ref.child("users").child(uid)
-            let values = ["name": name, "email": email]
-            
-            userReference.updateChildValues(values, withCompletionBlock: { (error, ref) in
-                if error != nil {
-                    print(error?.localizedDescription ?? 0)
-                    return
-                }
-            })
-            self.dismiss(animated: true, completion: nil)
-            
-        }
-    }
-
+   
 
     
     // MARK: - setupLoginRegisterSegmentControl
