@@ -10,7 +10,11 @@ import UIKit
 import Firebase
 import FirebaseStorage
 
+
 class LoginViewController: UIViewController {
+    
+    
+    var messagesController: MessageController?
     
     var inputsContainerViewHeightAnchor: NSLayoutConstraint?
     var nameTextFieldHeightAnchor: NSLayoutConstraint?
@@ -78,7 +82,7 @@ class LoginViewController: UIViewController {
     
     lazy var profileImageView: UIImageView = {
         let pfImage = UIImageView()
-        pfImage.image = UIImage(named: "ProfileImage.png")
+        pfImage.image = UIImage(named: "Profile.png")
         pfImage.layer.borderWidth = 4
         //pfImage.layer.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         pfImage.layer.cornerRadius = 150 / 2
@@ -150,8 +154,7 @@ class LoginViewController: UIViewController {
         passwordTextFieldHeightAnchor?.isActive = false
         passwordTextFieldHeightAnchor = passwordTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: loginRegisterSegmentControl.selectedSegmentIndex == 0 ? 1/2 : 1/3)
         passwordTextFieldHeightAnchor?.isActive = true
-        
-        
+
     }
 
     
@@ -175,13 +178,11 @@ class LoginViewController: UIViewController {
             if error != nil {
                 return
             }
+            self.messagesController?.fetchUserAndSetupNavBarTitle()
             self.dismiss(animated: true, completion: nil)
         }
         
     }
-        
-   
-
     
     // MARK: - setupLoginRegisterSegmentControl
     

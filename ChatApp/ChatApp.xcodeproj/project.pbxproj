@@ -21,6 +21,7 @@
 		6C8D3C9D20E03D5600897CA0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C8D3C9C20E03D5600897CA0 /* User.swift */; };
 		6C8D3C9F20E041B400897CA0 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C8D3C9E20E041B400897CA0 /* UserCell.swift */; };
 		6C93522C20E1665F00948619 /* LoginViewControllerHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C93522B20E1665F00948619 /* LoginViewControllerHandler.swift */; };
+		6CD5354A20E6733800300509 /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD5354920E6733800300509 /* Extentions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		6C8D3C9C20E03D5600897CA0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		6C8D3C9E20E041B400897CA0 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		6C93522B20E1665F00948619 /* LoginViewControllerHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerHandler.swift; sourceTree = "<group>"; };
+		6CD5354920E6733800300509 /* Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extentions.swift; sourceTree = "<group>"; };
 		8EABBFE6730C91BCFEB53A41 /* Pods_ChatApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BABF1F553F860D12D86F1CB5 /* Pods-ChatApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChatApp/Pods-ChatApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -85,6 +87,7 @@
 		6C0D319E20DD8E0A001B27F9 /* ChatApp */ = {
 			isa = PBXGroup;
 			children = (
+				6CD5354820E672F200300509 /* Helpers */,
 				6CED346120E25AFC009C6EE2 /* UICell */,
 				6CED346020E25AE8009C6EE2 /* UIColor */,
 				6CED345F20E25AC0009C6EE2 /* Model */,
@@ -96,6 +99,7 @@
 				6C0D31AE20DD8E14001B27F9 /* Info.plist */,
 				6C60390420DE3BFD0041A404 /* GoogleService-Info.plist */,
 				6C0D31A620DD8E0A001B27F9 /* ChatApp.xcdatamodeld */,
+				9570572C22FAD9968500FE5D /* VC */,
 			);
 			path = ChatApp;
 			sourceTree = "<group>";
@@ -109,6 +113,14 @@
 				6C93522B20E1665F00948619 /* LoginViewControllerHandler.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		6CD5354820E672F200300509 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				6CD5354920E6733800300509 /* Extentions.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		6CED345F20E25AC0009C6EE2 /* Model */ = {
@@ -142,6 +154,13 @@
 				68461C42459AFFA9C9CD0BBE /* Pods-ChatApp.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		9570572C22FAD9968500FE5D /* VC */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = VC;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -265,6 +284,7 @@
 			files = (
 				6C8D3C9F20E041B400897CA0 /* UserCell.swift in Sources */,
 				6C0D31B620DD9151001B27F9 /* LoginViewController.swift in Sources */,
+				6CD5354A20E6733800300509 /* Extentions.swift in Sources */,
 				6C93522C20E1665F00948619 /* LoginViewControllerHandler.swift in Sources */,
 				6C0D31A820DD8E0A001B27F9 /* ChatApp.xcdatamodeld in Sources */,
 				6C8D3C9B20E028A200897CA0 /* NewMessageController.swift in Sources */,

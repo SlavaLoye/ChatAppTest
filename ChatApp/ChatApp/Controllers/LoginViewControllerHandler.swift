@@ -24,48 +24,60 @@ extension LoginViewController: UIImagePickerControllerDelegate, UINavigationCont
         
         Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
             if error != nil {
-                print("Error")
+               // print("Error")
                 return
             }
             
             // MARK: - hadleLogin// создаем Reference или юзера в базе данных
             
-            guard let uid = Auth.auth().currentUser?.uid else {
+            guard let uid = Auth.auth().currentUser?.uid  else {
                 return
             }
+            
             // image successful authenficated user
             
             // var metadata = StorageMetadata?.self
             let imageName = NSUUID().uuidString
-            let storageRef = Storage.storage().reference().child("\(imageName).png")
+            let storageRef = Storage.storage().reference().child("profile_images").child("\(imageName).png")
             
-            let uploadData = UIImagePNGRepresentation(self.profileImageView.image!)
+            if let uploadData = UIImageJPEGRepresentation(self.profileImageView.image!, 0.1) {
             
-            storageRef.putData(uploadData!, metadata: nil, completion: { (metadata, error) in
+           // let uploadData = UIImagePNGRepresentation(self.profileImageView.image!)
+            
+                storageRef.putData(uploadData, metadata: nil, completion: { (metadata, error) in
                 
                 if error != nil, metadata != nil {
                     return
+                    
                 }
+                    // https://stackoverflow.com/questions/49344492/how-can-i-set-profile-pic-against-firebase-user-authentication-with-email
+                    //https://ruvid.net/video/swift-firebase-3-how-to-upload-images-to-firebase-storage-ep-5-b1vrjt7Nvb0.html
                 
-                if  let profileImageUrl = metadata?.size {
-                    let values = [name: name, email: email, "profileImage": profileImageUrl] as [String : Any]
-                    self.registeUserIntoDatabaseWithUID(uid: uid, values: values as [String: Any])
+                if let profileImageUrl = metadata?.size {
+                    let values = [name: name, "email": email, "profileImageUrl": profileImageUrl] as [String : AnyObject]
+                    self.registeUserIntoDatabaseWithUID(uid: uid, values: values as [String: AnyObject])
                 }
             })
             
             self.dismiss(animated: true, completion: nil)
-        }
     }
+  }
+}
     
-     func registeUserIntoDatabaseWithUID(uid: String, values: [String: Any]) {
+    private func registeUserIntoDatabaseWithUID(uid: String, values: [String: AnyObject]) {
         let ref = Database.database().reference()
         let userReference = ref.child("users").child(uid)
         userReference.updateChildValues(values, withCompletionBlock: { (error, ref) in
             if error != nil {
-               print(error?.localizedDescription ?? 0)
+              // print(error?.localizedDescription ?? 0)
                 return
             }
-        
+            
+            // оптимизируем шапку имени в навигейшен бар
+           // self.messagesController?.fetchUserAndSetupNavBarTitle()
+            self.messagesController?.chekIfUserIsLoogedIn()
+            self.messagesController?.navigationItem.title = values["name"] as? String
+            self.dismiss(animated: true, completion: nil)
         })
     }
 
@@ -107,8 +119,6 @@ extension LoginViewController: UIImagePickerControllerDelegate, UINavigationCont
 
 //                storageRef.downloadURL(completion: { (url, error) in
 //                    guard let downloadURL = url else { return }
-
-
 //  В Firebase 5.0 они избавились от downladURL()
 
 //https://stackoverflow.com/questions/50448396/value-of-type-storagemetadata-has-no-member-downloadurl

@@ -11,7 +11,9 @@ import UIKit
 class User: NSObject {
     
     var email: String?
+    
     var name : String?
-    var profileImage: Int64?
+    
+    var profileImageUrl: String?
     
 }
