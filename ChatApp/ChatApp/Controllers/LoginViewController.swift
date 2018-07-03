@@ -14,7 +14,7 @@ import FirebaseStorage
 class LoginViewController: UIViewController {
     
     
-    var messagesController: MessageController?
+  weak var messagesController: MessageController?
     
     var inputsContainerViewHeightAnchor: NSLayoutConstraint?
     var nameTextFieldHeightAnchor: NSLayoutConstraint?

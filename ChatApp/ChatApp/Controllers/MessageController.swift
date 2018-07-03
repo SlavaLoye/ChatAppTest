@@ -40,7 +40,7 @@ class MessageController: UITableViewController {
             
             guard  let uid = Auth.auth().currentUser?.uid else { return }
             Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value) { (snapshot) in
-                if let dictionary = snapshot.value as? [String: Any] {
+                if let dictionary = snapshot.value as? [String: AnyObject] {
                     
                     // добавляем юзера в navigationItem в заголовок
                     //self.navigationItem.title = dictionary["name"] as? String
@@ -59,7 +59,6 @@ class MessageController: UITableViewController {
         //titleView.backgroundColor = UIColor.red
         
         // MARK: containerView add
-        
         let containerView = UIView()
         containerView.translatesAutoresizingMaskIntoConstraints = false
         titleView.addSubview(containerView)
@@ -70,7 +69,7 @@ class MessageController: UITableViewController {
         profileImageView.translatesAutoresizingMaskIntoConstraints = false
         profileImageView.layer.cornerRadius = 20
         profileImageView.clipsToBounds = true
-        if let profileImageUrl = user.profileImageUrl {
+        if let profileImageUrl = user.profileImage {
             profileImageView.loadImageUsingCacheWithUrlString(urlString: profileImageUrl)
         }
         containerView.addSubview(profileImageView)
@@ -90,16 +89,22 @@ class MessageController: UITableViewController {
         
         nameLabel.leftAnchor.constraint(equalTo: profileImageView.rightAnchor, constant: 8).isActive = true
         nameLabel.centerYAnchor.constraint(equalTo: profileImageView.centerYAnchor).isActive = true
-        nameLabel.rightAnchor.constraint(equalTo: titleView.rightAnchor).isActive = true
+        nameLabel.rightAnchor.constraint(equalTo: containerView.rightAnchor).isActive = true
         nameLabel.heightAnchor.constraint(equalTo: profileImageView.heightAnchor).isActive = true
         
         // MARK: containerView - constraint
         
         containerView.centerXAnchor.constraint(equalTo: titleView.centerXAnchor).isActive = true
         containerView.centerYAnchor.constraint(equalTo: titleView.centerYAnchor).isActive = true
-        
+        //self.navigationItem.title = user.name
         self.navigationItem.titleView = titleView
+        titleView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showChatController)))
         
+    }
+    
+    @objc func showChatController() {
+        let chatLogController = ChatLogController(collectionViewLayout: UICollectionViewFlowLayout())
+        navigationController?.pushViewController(chatLogController, animated: true)
     }
     
     @objc func handleLogout() {
