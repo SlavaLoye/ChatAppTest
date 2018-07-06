@@ -11,6 +11,8 @@ import Firebase
 
 class NewMessageController: UITableViewController {
     
+   weak var messagesController: MessagesController?
+    
     let cellId = "Cell"
     
     var users = [User]()
@@ -28,12 +30,12 @@ class NewMessageController: UITableViewController {
     
     func fetchUser() {
         Database.database().reference().child("users").observe(.childAdded) { (snapshot) in
-        
             if let dictionary = snapshot.value as? [String: AnyObject] {
-                let user = User()
-                user.setValuesForKeys(dictionary)
+                let user = User(dictionary: dictionary)
+                user.id = snapshot.key
+               // user.setValuesForKeys(dictionary)
                 self.users.append(user)
-                print(user)
+                //print(user)
                 
                 // DispatchQueue
                 
@@ -62,14 +64,21 @@ class NewMessageController: UITableViewController {
         cell.detailTextLabel?.text = user.email
        
         
-        if let profileImageURL = user.profileImage {
-           cell.profileImageView.loadImageUsingCacheWithUrlString(urlString: profileImageURL)
+        if let profileImage = user.profileImageUrl {
+            cell.profileImageView.loadImageUsingCacheWithUrlString(profileImage)
         }
         return cell
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 72
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        dismiss(animated: true) {
+            let user = self.users[indexPath.row]
+         self.messagesController?.showChatControllerForUser(user)
+        }
     }
 }
 

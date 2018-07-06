@@ -12,9 +12,8 @@ import FirebaseStorage
 
 
 class LoginViewController: UIViewController {
-    
-    
-  weak var messagesController: MessageController?
+
+  weak var messagesController: MessagesController?
     
     var inputsContainerViewHeightAnchor: NSLayoutConstraint?
     var nameTextFieldHeightAnchor: NSLayoutConstraint?
@@ -82,7 +81,7 @@ class LoginViewController: UIViewController {
     
     lazy var profileImageView: UIImageView = {
         let pfImage = UIImageView()
-        pfImage.image = UIImage(named: "Profile.png")
+        pfImage.image = UIImage(named: "Profile")
         pfImage.layer.borderWidth = 4
         //pfImage.layer.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         pfImage.layer.cornerRadius = 150 / 2
