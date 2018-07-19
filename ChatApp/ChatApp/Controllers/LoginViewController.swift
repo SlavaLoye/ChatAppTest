@@ -55,6 +55,7 @@ class LoginViewController: UIViewController {
     let emailTextField: UITextField = {
         let emailTf = UITextField()
         emailTf.placeholder = "Email"
+        emailTf.keyboardType = .emailAddress
         emailTf.translatesAutoresizingMaskIntoConstraints = false
         return emailTf
     }()
@@ -126,6 +127,11 @@ class LoginViewController: UIViewController {
         setupLoginRegisterSegmentControl()
         self.view.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
         //UIColor(r: 25, g: 129, b: 46)
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
+    }
+    
+    @objc func hideKeyboard()  {
+        view.endEditing(true)
     }
     
    

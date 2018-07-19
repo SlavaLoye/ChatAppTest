@@ -30,6 +30,7 @@ class  ChatLogController: UICollectionViewController, UITextFieldDelegate, UICol
                 guard let dictionary = snapshot.value as? [String: AnyObject] else { return }
                 
                 let message = Message(dictionary: dictionary)
+                print("We fetched", message.text)
                 
                 if message.chatPartnerId() == self.user?.id {
                     self.messages.append(message)

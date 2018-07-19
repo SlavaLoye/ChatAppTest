@@ -48,6 +48,8 @@ class MessagesController: UITableViewController {
                     if let chatPartnerId = message.chatPartnerId() {
                         self.messagesDictionary[chatPartnerId] = message
                         
+                        // все сообщения будут отсортированны по дате
+                        
                         self.messages = Array(self.messagesDictionary.values)
                         self.messages.sort(by: { (message1, message2) -> Bool in
                             return (message1.timestamp?.intValue)! > (message2.timestamp?.intValue)!
@@ -75,13 +77,29 @@ class MessagesController: UITableViewController {
         return messages.count
     }
     
+    
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! UserCell
         
         let message = messages[indexPath.row]
         
         cell.message = message
-        
+//        if let toId = message.toId {
+//            let ref = Database.database().reference().child("users").child(toId)
+//            ref.observeSingleEvent(of: .value) { (snapshot) in
+//                if let dictionary = snapshot.value  as? [String: AnyObject] {
+//                    cell.textLabel?.text = dictionary["name"] as? String
+//
+//                    if let profileImageUrl = dictionary["profileImageUrl"] as? String {
+//                        cell.profileImageView.loadImageUsingCacheWithUrlString(profileImageUrl)
+//
+//                    }
+//                }
+//                 print(snapshot)
+//            }
+//        }
+//        cell.detailTextLabel?.text = message.text
         return cell
     }
     
