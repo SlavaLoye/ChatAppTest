@@ -14,6 +14,7 @@ class  ChatLogController: UICollectionViewController, UITextFieldDelegate, UICol
     var user: User? {
         didSet {
             navigationItem.title = user?.name
+            observeMessages()
         }
     }
     
@@ -30,7 +31,7 @@ class  ChatLogController: UICollectionViewController, UITextFieldDelegate, UICol
                 guard let dictionary = snapshot.value as? [String: AnyObject] else { return }
                 
                 let message = Message(dictionary: dictionary)
-                print("We fetched", message.text)
+                print("We fetched", message.text as Any)
                 
                 if message.chatPartnerId() == self.user?.id {
                     self.messages.append(message)
@@ -59,7 +60,6 @@ class  ChatLogController: UICollectionViewController, UITextFieldDelegate, UICol
         collectionView?.alwaysBounceVertical = true
         collectionView?.backgroundColor = UIColor.white
         collectionView?.register(ChatMessageCell.self, forCellWithReuseIdentifier: cellId)
-        
         collectionView?.keyboardDismissMode = .interactive
     }
     
@@ -118,9 +118,7 @@ class  ChatLogController: UICollectionViewController, UITextFieldDelegate, UICol
         
         let message = messages[indexPath.item]
         cell.textView.text = message.text
-        
         setupCell(cell, message: message)
-        
         cell.bubbleWidthAnchor?.constant = estimateFrameForText(message.text!).width + 32
         
         return cell

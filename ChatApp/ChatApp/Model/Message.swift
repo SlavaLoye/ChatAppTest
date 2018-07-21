@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseAuth
 
+
 class Message: NSObject {
     
     var fromId: String?
