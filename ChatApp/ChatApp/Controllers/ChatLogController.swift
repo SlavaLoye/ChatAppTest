@@ -11,14 +11,14 @@ import Firebase
 
 class  ChatLogController: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout{
     
+    var messages = [Message]()
+    
     var user: User? {
         didSet {
             navigationItem.title = user?.name
             observeMessages()
         }
     }
-    
-    var messages = [Message]()
     
     func observeMessages() {
         guard let uid = Auth.auth().currentUser?.uid else { return }

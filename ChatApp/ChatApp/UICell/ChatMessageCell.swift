@@ -10,6 +10,7 @@
 import UIKit
 
 class ChatMessageCell: UICollectionViewCell {
+    
     let textView: UITextView = {
         let tv = UITextView()
         tv.font = UIFont.systemFont(ofSize: 16)
